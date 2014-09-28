@@ -1,0 +1,35 @@
+﻿@model WorkAround.Web.Models.LoginModel
+
+@{
+    ViewBag.Title = "WorkAround - Login";
+}
+
+@Html.ValidationSummary(true)
+
+@using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { @class = "ink-form column-group gutters" }))
+{
+    <fieldset class="all-33 small-100 tiny-100">
+        <legend>Please enter your credentials</legend>
+
+        <div class="control-group">
+            <label for="email">Email</label>
+            <div class="control">
+                @Html.EditorFor(m => m.Email, new { @id = "email", placeholder = "Enter email..." })
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="password">Password</label>
+            <div class="control">
+                @Html.EditorFor(m => m.Password, new { @id = "password", placeholder = "Enter password..." })
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <div class="control">
+                <button class="ink-button" value="Log in">Log in</button>
+            </div>
+        </div>
+    </fieldset>
+}
+
