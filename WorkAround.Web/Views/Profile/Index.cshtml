@@ -2,6 +2,16 @@
     ViewBag.Title = "WorkAround - Profile";
 }
 
-Login: @User.Identity.Name
-
-
+Login: @CurrentUser.Email
+<br />
+Country: @CurrentUser.Country
+<br />
+Willing to relocate:
+@if (@CurrentUser.WillingToRelocate)
+{
+    <span>yes</span>
+}
+else
+{
+  <span>no</span>
+}
