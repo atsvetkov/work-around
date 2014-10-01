@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
@@ -33,6 +34,15 @@ namespace WorkAround.Web
 
 				return userManager;
 			};
+
+			var config = new HttpConfiguration();
+			config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{k}/{l}",
+                defaults: new { k = RouteParameter.Optional, l = RouteParameter.Optional }
+            );
+
+			app.UseWebApi(config);
 		}
 	}
 }

@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Http;
 using WorkAround.Search;
 using WorkAround.Search.Contracts;
 
 namespace WorkAround.Web.Controllers
 {
-	[AllowAnonymous]
-    public class SearchController : Controller
-    {
+	public class SearchController : ApiController
+	{
 		private ISearchProvider[] _searchProviders = { new FakeSearchProvider() };
-
-        //
-        // GET: /Home/
-        public ActionResult Index()
-        {
-            return View();
-        }
+		
+		public IHttpActionResult Get(string k = null, string l = null)
+		{
+			return Ok(new FakeSearchProvider().Search(new SearchOptions(k, l)));
+		}
 	}
 }

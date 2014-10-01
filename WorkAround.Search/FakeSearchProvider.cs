@@ -24,7 +24,18 @@ namespace WorkAround.Search
 	    {
 			Thread.Sleep(500);
 
-		    var items = string.IsNullOrWhiteSpace(options.Keywords) ? _hardcodedPositions : _hardcodedPositions.Where(p => p.Position.Contains(options.Keywords));
+		    var items = _hardcodedPositions;
+		    if (!string.IsNullOrWhiteSpace(options.Keywords))
+		    {
+				var keywords = options.Keywords.Trim().ToLower();
+			    items = items.Where(p => p.Position.ToLower().Contains(keywords));
+		    }
+
+		    if (!string.IsNullOrWhiteSpace(options.Location))
+			{
+				var location = options.Location.Trim().ToLower();
+				items = items.Where(p => p.Location.ToLower().Contains(location));
+			}
 
 			return new SearchResult(items);
 	    }

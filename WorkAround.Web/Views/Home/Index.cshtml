@@ -1,0 +1,73 @@
+﻿@model WorkAround.Web.Models.SearchOptionsModel
+
+@{
+    ViewBag.Title = "WorkAround - Home";
+}
+
+<div class="double-top-space" ng-app="mainApp" ng-controller="searchResultsController" ng-init="init('@Model.Keywords', '@Model.Location')">
+    <div class="ink-grid">
+        <div class="column-group">
+            <div class="all-30"></div>
+            <div class="all-70">
+                <h1 class="uppercase">Find a job around</h1>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="ink-grid">
+        <div class="column-group">
+            <div class="all-20"></div>
+
+            <div class="all-60">
+                <form action="" class="ink-form">
+                    <div class="column-group">
+                        <div class="control-group all-40">
+                            <div class="control">
+                                <input type="text" placeholder="Job title, keywords etc." ng-model="keywords" />
+                            </div>
+                        </div>
+
+                        <div class="control-group all-40">
+                            <div class="control append-button">
+                                <span>
+                                    <input type="text" placeholder="City, state etc." ng-model="location" value="@Model.Location" />
+                                </span>
+                                <button class="ink-button" ng-click="search($scope.keywords, $scope.location)">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="all-20"></div>
+        </div>
+    </div>
+
+    <div class="ink-grid top-space">
+        <div class="column-group">
+            <div class="all-20"></div>
+
+            <div class="all-60">
+                <div class="ink-grid">
+                    <div class="column-group quarter-vertical-gutters vertical">
+                        <div class="all-100" ng-repeat="item in items">
+                            <div class="column">
+                                <div class="large">
+                                    <strong class="large">{{item.Position}}</strong>
+                                </div>
+                                <em>{{item.Company}} - {{item.Location}}</em>
+                                <p>{{item.Description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="all-20"></div>
+        </div>
+    </div>
+</div>
+
