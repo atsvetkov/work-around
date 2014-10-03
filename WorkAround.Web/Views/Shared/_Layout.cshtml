@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" type="text/css" href="http://cdn.ink.sapo.pt/3.1.0/css/ink-flex.min.css">
     <link rel="stylesheet" type="text/css" href="http://cdn.ink.sapo.pt/3.1.0/css/font-awesome.min.css">
-    
+
     <!-- load inks css for IE8 -->
     <!--[if lt IE 9 ]>
         <link rel="stylesheet" href="http://cdn.ink.sapo.pt/3.1.0/css/ink-ie.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
@@ -36,7 +36,10 @@
     <style type="text/css">
         html, body {
             height: 100%;
-            background: #f0f0f0;
+        }
+
+        h1 {
+            font-size: 75px;
         }
 
         .wrap {
@@ -47,11 +50,15 @@
             overflow: auto;
         }
 
+        header {
+            background: #ccc;
+        }
+
         footer {
             background: #ccc;
             border: 0;
         }
-        
+
         .push, footer {
             height: 120px;
             margin-top: 0;
@@ -60,66 +67,81 @@
         footer * {
             line-height: inherit;
         }
+
+        .background-image {
+            position: fixed;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            display: block;
+            
+            filter: blur(5px);
+            background: url('/Content/background2.jpg') no-repeat center center fixed;
+            /*-webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;*/
+        }
     </style>
 
 
 
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
-    <body>
-        <div class="wrap">
-            <header class="clearfix">
-                <div class="ink-grid">
-                    <div class="ink-navigation xlarge-push-right large-push-right half-top-space">
-                        @if (@User.Identity.IsAuthenticated)
+<body>
+    <div class="wrap">
+        <header class="clearfix">
+            <div class="ink-grid">
+                <div class="ink-navigation xlarge-push-right large-push-right half-top-space">
+                    @if (@User.Identity.IsAuthenticated)
+                    {
+                        using (@Html.BeginForm("Logoff", "Auth", FormMethod.Post, new { @class = "ink-form " }))
                         {
-                            using (@Html.BeginForm("Logoff", "Auth", FormMethod.Post, new { @class = "ink-form " }))
-                            {
-                                <div class="control-group column-group gutters">
-                                    <div class="control right-space">
-                                        @Html.ActionLink(User.Identity.Name, "Index", "Profile")
-                                    </div>
-
-                                    <div class="control">
-                                        @Html.ActionLink("Sign out", "Logoff", "Auth")
-                                    </div>
+                            <div class="control-group column-group gutters">
+                                <div class="control right-space">
+                                    @Html.ActionLink(User.Identity.Name, "Index", "Profile")
                                 </div>
 
-                            }
-                        }
-                        else
-                        {
-                            @Html.ActionLink("Sign in", "Login", "Auth") <span>or</span> @Html.ActionLink("Sign up", "Register", "Auth")
-                        }
+                                <div class="control">
+                                    @Html.ActionLink("Sign out", "Logoff", "Auth")
+                                </div>
+                            </div>
 
-                    </div>
+                        }
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Sign in", "Login", "Auth") <span>or</span> @Html.ActionLink("Sign up", "Register", "Auth")
+                    }
+
                 </div>
-            </header>
-
-
-
-            <div class="ink-grid">
-                @RenderBody()
             </div>
+        </header>
 
-            <div class="push"></div>
-        </div>
+
+
         
-        <footer class="clearfix">
-            <div class="ink-grid">
-                <ul class="unstyled inline half-vertical-space">
-                    <li class="active">
-                        @Html.ActionLink("Search", "Index", "Search")
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Contacts</a>
-                    </li>
-                </ul>
-            </div>
-        </footer>
+        @RenderBody()
+        
 
-    </body>
+        <div class="push"></div>
+    </div>
+
+    <footer class="clearfix">
+        <div class="ink-grid">
+            <ul class="unstyled inline half-vertical-space">
+                <li class="active">
+                    @Html.ActionLink("Search", "Index", "Home")
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Contacts</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
 </html>

@@ -17,7 +17,10 @@ searchControllers.controller('searchResultsController', ['$scope', 'Positions', 
     $scope.init = function (keywords, location) {
         $scope.keywords = keywords;
         $scope.location = location;
-        $scope.search();
+
+        if (keywords && location) {
+            $scope.search();
+        }
     };
 }
 ]);

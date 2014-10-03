@@ -6,10 +6,10 @@
 
 <div class="double-top-space" ng-app="mainApp" ng-controller="searchResultsController" ng-init="init('@Model.Keywords', '@Model.Location')">
     <div class="ink-grid">
-        <div class="column-group">
-            <div class="all-30"></div>
-            <div class="all-70">
-                <h1 class="uppercase">Find a job around</h1>
+        <div class="column-group top-space">
+            <div class="all-20"></div>
+            <div class="all-80">
+                <h1 class="uppercase">Work is around</h1>
             </div>
 
         </div>
@@ -58,6 +58,7 @@
                                 <div class="large">
                                     <strong class="large">{{item.Position}}</strong>
                                 </div>
+                                <p class="small uppercase">{{ item.SearchProviderName }}</p>
                                 <em>{{item.Company}} - {{item.Location}}</em>
                                 <p>{{item.Description}}</p>
                             </div>

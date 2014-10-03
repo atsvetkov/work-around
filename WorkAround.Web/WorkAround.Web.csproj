@@ -127,6 +127,8 @@
     <Content Include="app\app.js" />
     <Content Include="app\controllers\searchControllers.js" />
     <Content Include="app\services\searchServices.js" />
+    <Content Include="Content\background1.jpg" />
+    <Content Include="Content\background2.jpg" />
     <Content Include="Global.asax" />
     <Content Include="scripts\angular-mocks.js" />
     <Content Include="scripts\angular-resource.js" />
