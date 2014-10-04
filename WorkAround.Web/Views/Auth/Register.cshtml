@@ -4,46 +4,58 @@
     ViewBag.Title = "WorkAround - Register";
 }
 
-@Html.ValidationSummary(true)
+<div class="ink-grid">
+    <div class="column-group">
+        <div class="all-30"></div>
 
-@using (Html.BeginForm("Register", "Auth", FormMethod.Post, new { @class = "ink-form column-group gutters" }))
-{
-    <fieldset class="all-33 small-100 tiny-100">
-        <legend>Please fill the registration form</legend>
+        <div class="all-40">
+            @Html.ValidationSummary(true)
 
-        <div class="control-group">
-            <label for="email">Email</label>
-            <div class="control">
-                @Html.EditorFor(m => m.Email, new { @id = "email", placeholder = "Enter email..." })
-            </div>
+            @using (Html.BeginForm("Register", "Auth", FormMethod.Post, new { @class = "ink-form column-group gutters" }))
+            {
+                <fieldset class="all-100 small-100 tiny-100">
+                    <legend>Please fill the registration form</legend>
+
+                    <div class="control-group">
+                        <label for="email">Email</label>
+                        <div class="control">
+                            @Html.EditorFor(m => m.Email, new { @id = "email", placeholder = "Enter email..." })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="password">Password</label>
+                        <div class="control">
+                            @Html.EditorFor(m => m.Password, new { @id = "password", placeholder = "Enter password..." })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="country">Country</label>
+                        <div class="control">
+                            @Html.EditorFor(m => m.Country, new { @id = "country", placeholder = "Your country..." })
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <ul class="control unstyled">
+                            <li>
+                                <input class="check-box" data-val="true" data-val-required="The WillingToRelocate field is required." id="WillingToRelocate" name="WillingToRelocate" type="checkbox" value="true">
+                                <label>Are you willing to relocate?</label>
+                            </li>
+                        </ul>
+                        <input name="WillingToRelocate" type="hidden" value="false">
+                    </div>
+                    
+                    <div class="control-group">
+                        <div class="control">
+                            <button class="ink-button" value="Register">Register</button>
+                        </div>
+                    </div>
+                </fieldset>
+            }
         </div>
 
-        <div class="control-group">
-            <label for="password">Password</label>
-            <div class="control">
-                @Html.EditorFor(m => m.Password, new { @id = "password", placeholder = "Enter password..." })
-            </div>
-        </div>
-        
-        <div class="control-group">
-            <label for="country">Country</label>
-            <div class="control">
-                @Html.EditorFor(m => m.Country, new { @id = "country", placeholder = "Your country..." })
-            </div>
-        </div>
-        
-        <div class="control-group">
-            <label for="relocate">Are you willing to relocate?</label>
-            <div class="control">
-                @Html.EditorFor(m => m.WillingToRelocate, new { @id = "relocate" })
-            </div>
-        </div>
-        
-        <div class="control-group">
-            <div class="control">
-                <button class="ink-button" value="Register">Register</button>
-            </div>
-        </div>
-    </fieldset>
-}
-
+        <div class="all-30"></div>
+    </div>
+</div>

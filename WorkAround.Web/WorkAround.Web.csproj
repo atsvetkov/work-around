@@ -127,8 +127,8 @@
     <Content Include="app\app.js" />
     <Content Include="app\controllers\searchControllers.js" />
     <Content Include="app\services\searchServices.js" />
-    <Content Include="Content\background1.jpg" />
     <Content Include="Content\background2.jpg" />
+    <Content Include="Content\favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="scripts\angular-mocks.js" />
     <Content Include="scripts\angular-resource.js" />
@@ -157,6 +157,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\SearchOptionsModel.cs" />
+    <Compile Include="Models\SearchResultItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -169,6 +170,8 @@
     <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="scripts\angular-resource.min.js.map" />
+    <Content Include="ExternalApi.config" />
+    <None Include="Properties\PublishProfiles\workaround.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

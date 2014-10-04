@@ -56,9 +56,13 @@
                         <div class="all-100" ng-repeat="item in items">
                             <div class="column">
                                 <div class="large">
-                                    <strong class="large">{{item.Position}}</strong>
+                                    <a href="{{item.JobUrl}}" target="_blank">
+                                        <strong class="large">{{item.Position}}</strong>
+                                    </a>
                                 </div>
-                                <p class="small uppercase">{{ item.SearchProviderName }}</p>
+                                <p class="small uppercase">
+                                    <span class="{{item.ProviderLabelClassName}}">{{item.SearchProviderName}}</span>
+                                </p>
                                 <em>{{item.Company}} - {{item.Location}}</em>
                                 <p>{{item.Description}}</p>
                             </div>

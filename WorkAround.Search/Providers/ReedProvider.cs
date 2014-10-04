@@ -2,13 +2,12 @@
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Security.Policy;
 using ServiceStack.Text;
 using WorkAround.Search.Contracts;
 
 namespace WorkAround.Search.Providers
 {
-	public sealed class ReedProvider : ISearchProvider
+	public sealed class ReedProvider : BaseSearchProvider
 	{
 		private readonly string _apiKey;
 		private const string BaseApiUrl = "http://www.reed.co.uk/api/1.0/search";
@@ -18,14 +17,13 @@ namespace WorkAround.Search.Providers
 			_apiKey = apiKey;
 		}
 
-		public string Name
+		public override string Name
 		{
 			get { return "Reed.co.uk"; }
 		}
 
-		public SearchResult Search(SearchOptions options)
+		public override SearchResult Search(SearchOptions options)
 		{
-			string s = null;
 			var uri = BuildUri(options);
 			var webRequest = (HttpWebRequest)WebRequest.Create(uri);
 			webRequest.Credentials = new NetworkCredential(_apiKey, string.Empty);
@@ -43,17 +41,18 @@ namespace WorkAround.Search.Providers
 							WebUtility.HtmlDecode(r.jobDescription),
 							r.minimumSalary + " - " + r.maximumSalary,
 							r.locationName,
+							r.jobUrl,
 							Name));
 
 				return new SearchResult(items);
 			}
 		}
 
-		private Uri BuildUri(SearchOptions options)
+		protected override Uri BuildUri(SearchOptions options)
 		{
 			var uriBuilder = new UriBuilder(BaseApiUrl)
 			{
-				Query = string.Format("keywords={0}&location={1}", options.Keywords, options.Location)
+				Query = string.Format("keywords={0}&location={1}&resultsToTake=5", options.Keywords, options.Location)
 			};
 
 			return uriBuilder.Uri;

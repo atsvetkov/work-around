@@ -94,7 +94,7 @@ namespace WorkAround.Web.Controllers
 			{
 				var identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
 				Request.GetOwinContext().Authentication.SignIn(identity);
-				return RedirectToAction("index", "search");
+				return RedirectToAction("Index", "Home");
 			}
 
 			foreach (var error in result.Errors)
@@ -109,7 +109,7 @@ namespace WorkAround.Web.Controllers
 		{
 			if (string.IsNullOrEmpty(url) || !Url.IsLocalUrl(url))
 			{
-				return Url.Action("Index", "Search");
+				return Url.Action("Index", "Home");
 			}
 
 			return url;

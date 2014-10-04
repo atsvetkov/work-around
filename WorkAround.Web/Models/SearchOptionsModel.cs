@@ -8,7 +8,7 @@
 			Location = location;
 		}
 
-		public string Keywords { get; set; }
-		public string Location { get; set; }
+		public string Keywords { get; private set; }
+		public string Location { get; private set; }
 	}
 }
