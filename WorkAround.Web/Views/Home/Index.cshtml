@@ -33,7 +33,7 @@
                                 <span>
                                     <input type="text" placeholder="City, state etc." ng-model="location" value="@Model.Location" />
                                 </span>
-                                <button class="ink-button" ng-click="search($scope.keywords, $scope.location)">
+                                <button class="ink-button" ng-click="search($scope.keywords, $scope.location)" ng-disabled="busy">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
@@ -52,20 +52,24 @@
 
             <div class="all-60">
                 <div class="ink-grid">
+                    <div class="column-group" ng-show="busy">
+                        <div class="all-30 push-center">
+                            <i class="fa fa-spinner fa-spin fa-3x"></i>
+                        </div>
+                    </div>
+
                     <div class="column-group quarter-vertical-gutters vertical">
-                        <div class="all-100" ng-repeat="item in items">
-                            <div class="column">
-                                <div class="large">
-                                    <a href="{{item.JobUrl}}" target="_blank">
-                                        <strong class="large">{{item.Position}}</strong>
-                                    </a>
-                                </div>
-                                <p class="small uppercase">
-                                    <span class="{{item.ProviderLabelClassName}}">{{item.SearchProviderName}}</span>
-                                </p>
-                                <em>{{item.Company}} - {{item.Location}}</em>
-                                <p>{{item.Description}}</p>
+                        <div class="all-100 animate" ng-repeat="item in items">
+                            <div class="large">
+                                <a href="{{item.JobUrl}}" target="_blank">
+                                    <strong class="large">{{item.Position}}</strong>
+                                </a>
                             </div>
+                            <p class="small uppercase">
+                                <span class="{{item.ProviderLabelClassName}}">{{item.SearchProviderName}}</span>
+                            </p>
+                            <em>{{item.Company}} - {{item.Location}}</em>
+                            <p>{{item.Description}}</p>
                         </div>
                     </div>
                 </div>

@@ -11,28 +11,29 @@
 
     <title>@ViewBag.Title</title>
 
-    <link rel="stylesheet" type="text/css" href="http://cdn.ink.sapo.pt/3.1.0/css/ink-flex.min.css" />
-    <link rel="stylesheet" type="text/css" href="http://cdn.ink.sapo.pt/3.1.0/css/font-awesome.min.css" />
-    <link rel="icon" href="@Url.Content("~/content/favicon.ico")" />
+    <link href="@Url.Content("~/Content/ink-flex.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/font-awesome.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/content/favicon.ico")" rel="icon" />
 
     <!-- load inks css for IE8 -->
     <!--[if lt IE 9 ]>
-        <link rel="stylesheet" href="http://cdn.ink.sapo.pt/3.1.0/css/ink-ie.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="@Url.Content("~/Content/ink-ie.min.css")" type="text/css" media="screen" title="no title" charset="utf-8">
     <![endif]-->
     <!-- test browser flexbox support and load legacy grid if unsupported -->
-    <script type="text/javascript" src="http://cdn.ink.sapo.pt/3.1.0/js/modernizr.js"></script>
-    <script type="text/javascript">
-        Modernizr.load({
-            test: Modernizr.flexbox,
-            nope: 'http://cdn.ink.sapo.pt/3.1.0/css/ink-legacy.min.css'
-        });
-    </script>
+    @*<script src="@Url.Content("~/scripts/modernizr-2.8.3.js")"></script>
+        <script type="text/javascript">
+            Modernizr.load({
+                test: Modernizr.flexbox,
+                nope: '@Url.Content("~/Content/ink-legacy.min.css")'
+            });
+        </script>*@
 
-    <script src="~/scripts/angular.js"></script>
-    <script src="~/scripts/angular-resource.js"></script>
-    <script src="~/app/app.js"></script>
-    <script src="~/app/controllers/searchControllers.js"></script>
-    <script src="~/app/services/searchServices.js"></script>
+    <script src="@Url.Content("~/scripts/angular.js")"></script>
+    <script src="@Url.Content("~/scripts/angular-resource.js")"></script>
+    <script src="@Url.Content("~/scripts/angular-animate.js")"></script>
+    <script src="@Url.Content("~/app/app.js")"></script>
+    <script src="@Url.Content("~/app/controllers/searchControllers.js")"></script>
+    <script src="@Url.Content("~/app/services/searchServices.js")"></script>
 
     <style type="text/css">
         html, body {
@@ -65,9 +66,9 @@
             margin-top: 0;
         }
 
-        footer * {
-            line-height: inherit;
-        }
+            footer * {
+                line-height: inherit;
+            }
 
         .background-image {
             position: fixed;
@@ -75,7 +76,6 @@
             right: 0;
             z-index: 1;
             display: block;
-            
             filter: blur(5px);
             background: url('/Content/background2.jpg') no-repeat center center fixed;
             /*-webkit-background-size: cover;
@@ -83,9 +83,35 @@
             -o-background-size: cover;
             background-size: cover;*/
         }
+
+        .animate.ng-enter,
+        .animate.ng-leave {
+            -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            position: relative;
+            display: block;
+            overflow: hidden;
+            text-overflow: clip;
+            white-space: nowrap;
+        }
+
+            .animate.ng-leave.animate.ng-leave-active,
+            .animate.ng-enter {
+                opacity: 0;
+                width: 0px;
+                height: 0px;
+            }
+
+                .animate.ng-enter.animate.ng-enter-active,
+                .animate.ng-leave {
+                    opacity: 1;
+                    width: 250px;
+                    height: 130px;
+                }
     </style>
-    
-    @*<script src="~/Scripts/modernizr-2.6.2.js"></script>*@
 </head>
 <body>
     <div class="wrap">
@@ -115,9 +141,9 @@
                 </div>
             </div>
         </header>
-        
+
         @RenderBody()
-        
+
         <div class="push"></div>
     </div>
 

@@ -6,8 +6,10 @@ searchControllers.controller('searchResultsController', ['$scope', 'Positions', 
     $scope.search = function () {
         var items = [];
 
-        window.history.replaceState({}, 'Search', '/?k=' + $scope.keywords + "&l=" + $scope.location);
+        window.history.pushState({}, 'Search', '/?k=' + $scope.keywords + "&l=" + $scope.location);
+        $scope.busy = true;
         Positions.search($scope.keywords, $scope.location).query(function (data) {
+            $scope.busy = false;
             angular.forEach(data, function (item) {
                 $scope.items.push(item);
             });

@@ -1,1 +1,1 @@
-﻿var mainApp = angular.module('mainApp', ['searchServices', 'searchControllers']);
+﻿var mainApp = angular.module('mainApp', ['searchServices', 'searchControllers', 'ngAnimate']);

@@ -1,25 +1,24 @@
 ﻿using System.Configuration;
 using System.Linq;
 using System.Web.Http;
+using WorkAround.Search;
 using WorkAround.Search.Contracts;
-using WorkAround.Search.Providers;
 using WorkAround.Web.Models;
 
 namespace WorkAround.Web.Controllers
 {
 	public class SearchController : ApiController
 	{
-		private readonly ISearchProvider[] _searchProviders =
-		{
-			new ReedProvider(ConfigurationManager.AppSettings["ReedApiKey"]),
-			new IndeedProvider(ConfigurationManager.AppSettings["IndeedPublisherId"]),
-			new CareerBuilderProvider(ConfigurationManager.AppSettings["CareerBuilderDeveloperKey"])
-		};
-		
 		public IHttpActionResult Get(string k = null, string l = null)
 		{
 			var options = new SearchOptions(k, l);
-			var results = _searchProviders.Select(p => p.Search(options)).SelectMany(r => r.Items).Select(i => new SearchResultItemModel
+
+			var searchService = new SearchService(
+				ConfigurationManager.AppSettings["ReedApiKey"],
+				ConfigurationManager.AppSettings["IndeedPublisherId"],
+				ConfigurationManager.AppSettings["CareerBuilderDeveloperKey"]);
+
+			var results = searchService.Search(options).Select(i => new SearchResultItemModel
 			{
 				Position = i.Position,
 				Company = i.Company,
@@ -29,7 +28,7 @@ namespace WorkAround.Web.Controllers
 				JobUrl = i.JobUrl,
 				SearchProviderName = i.SearchProviderName,
 				ProviderLabelClassName = GetProviderLabelClassName(i.SearchProviderName)
-			});
+			}).OrderBy(item => item.Position);
 
 			return Ok(results);
 		}
