@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 using WorkAround.Search;
 using WorkAround.Search.Contracts;
@@ -9,16 +10,17 @@ namespace WorkAround.Web.Controllers
 {
 	public class SearchController : ApiController
 	{
-		public IHttpActionResult Get(string k = null, string l = null)
+		public async Task<IHttpActionResult> Get(string k = null, string l = null)
 		{
 			var options = new SearchOptions(k, l);
 
-			var searchService = new SearchService(
+			ISearchService searchService = new SearchService(
 				ConfigurationManager.AppSettings["ReedApiKey"],
 				ConfigurationManager.AppSettings["IndeedPublisherId"],
 				ConfigurationManager.AppSettings["CareerBuilderDeveloperKey"]);
 
-			var results = searchService.Search(options).Select(i => new SearchResultItemModel
+			var resultItems = await searchService.SearchAsync(options);
+			var results = resultItems.Select(i => new SearchResultItemModel
 			{
 				Position = i.Position,
 				Company = i.Company,

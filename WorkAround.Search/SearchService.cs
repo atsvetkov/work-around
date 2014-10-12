@@ -27,5 +27,13 @@ namespace WorkAround.Search
 
 			return searchResults.SelectMany(r => r.Items);
 		}
+
+		public async Task<IEnumerable<SearchResultItem>> SearchAsync(SearchOptions options)
+		{
+			var tasks = _searchProviders.Select(p => Task.Run(() => p.Search(options)));
+			var searchResults = await Task.WhenAll(tasks);
+
+			return searchResults.SelectMany(r => r.Items);
+		}
 	}
 }

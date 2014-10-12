@@ -32,29 +32,21 @@ namespace WorkAround.Search.Providers
 			return uriBuilder.Uri;
 		}
 
-		public override SearchResult Search(SearchOptions options)
+		protected override SearchResult DeserializeSearchResult(Stream stream)
 		{
-			var uri = BuildUri(options);
-			var webRequest = (HttpWebRequest)WebRequest.Create(uri);
-			using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
-			using (var stream = webResponse.GetResponseStream())
-			using (var reader = new StreamReader(stream))
-			{
-				var content = reader.ReadToEnd();
-				var searchResult = JsonSerializer.DeserializeFromString<IndeedSearchResult>(content);
-				var items =
-					searchResult.results.Select(
-						r => new SearchResultItem(
-							r.jobtitle,
-							r.company,
-							WebUtility.HtmlDecode(r.snippet),
-							string.Empty,
-							r.city + ", " + r.country,
-							r.url,
-							Name));
+			var searchResult = JsonSerializer.DeserializeFromStream<IndeedSearchResult>(stream);
+			var items =
+				searchResult.results.Select(
+					r => new SearchResultItem(
+						r.jobtitle,
+						r.company,
+						WebUtility.HtmlDecode(r.snippet),
+						string.Empty,
+						r.city + ", " + r.country,
+						r.url,
+						Name));
 
-				return new SearchResult(items);
-			}
+			return new SearchResult(items);
 		}
 	}
 	

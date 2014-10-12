@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Xml;
@@ -29,6 +30,27 @@ namespace WorkAround.Search.Providers
 			};
 
 			return uriBuilder.Uri;
+		}
+
+		protected override SearchResult DeserializeSearchResult(Stream stream)
+		{
+			using (var xmlReader = XmlReader.Create(stream))
+			{
+				var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof (ResponseJobSearch));
+				var searchResult = (ResponseJobSearch) xmlSerializer.Deserialize(xmlReader);
+				var items =
+					searchResult.Results.Select(
+						r => new SearchResultItem(
+							r.JobTitle,
+							r.Company,
+							r.DescriptionTeaser,
+							r.Pay,
+							r.Location,
+							r.JobDetailsURL,
+							Name));
+
+				return new SearchResult(items);
+			}
 		}
 
 		public override SearchResult Search(SearchOptions options)

@@ -47,7 +47,6 @@
     <Compile Include="IConfig.cs" />
     <Compile Include="Providers\BaseSearchProvider.cs" />
     <Compile Include="Providers\CareerBuilderProvider.cs" />
-    <Compile Include="Providers\FakeSearchProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\IndeedProvider.cs" />
     <Compile Include="Providers\ReedProvider.cs" />
